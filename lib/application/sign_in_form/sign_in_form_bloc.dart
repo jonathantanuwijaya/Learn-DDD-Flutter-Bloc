@@ -19,7 +19,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
 
   FutureOr<void> _onEvent(
       SignInFormEvent event, Emitter<SignInFormState> emit) {
-    // ignore: void_checks
+ 
     return event.map(emailChanged: (event) async {
       state.copyWith(
           emailAddress: EmailAddress(event.emailStr),
