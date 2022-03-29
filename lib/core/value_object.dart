@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:learning/core/errors.dart';
 import 'failures.dart';
 
 @immutable
@@ -11,6 +12,10 @@ abstract class ValueObject<T> {
   //   assert(input != null);
   //   return EmailAddress._(validateEmailAddress(input));
   // }
+  T getOrCrash() {
+    return value.fold(
+        (failure) => throw UnExpectedValueError(failure), (r) => r);
+  }
 
 //  const EmailAddress._(this.value);
   bool isValid() => value.isRight();

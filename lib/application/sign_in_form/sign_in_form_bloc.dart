@@ -18,9 +18,9 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
   }
 
   FutureOr<void> _onEvent(
-      SignInFormEvent event, Emitter<SignInFormState> emit) {
+      SignInFormEvent event, Emitter<SignInFormState> emit) async{
  
-    return event.map(emailChanged: (event) async {
+    await event.map(emailChanged: (event) async {
       state.copyWith(
           emailAddress: EmailAddress(event.emailStr),
           authFailureOrSucessOption: none());
