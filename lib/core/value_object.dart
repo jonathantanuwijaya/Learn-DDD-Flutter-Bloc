@@ -12,8 +12,8 @@ abstract class ValueObject<T> {
   //   return EmailAddress._(validateEmailAddress(input));
   // }
 
-  
 //  const EmailAddress._(this.value);
+  bool isValid() => value.isRight();
 
   @override
   bool operator ==(Object other) {
