@@ -20,16 +20,15 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
   }
 
   FutureOr<void> _onEvent(
-      SignInFormEvent event, Emitter<SignInFormState> emit) async{
- 
+      SignInFormEvent event, Emitter<SignInFormState> emit) async {
     await event.map(emailChanged: (event) async {
-      state.copyWith(
+      emit(state.copyWith(
           emailAddress: EmailAddress(event.emailStr),
-          authFailureOrSucessOption: none());
+          authFailureOrSucessOption: none()));
     }, passwordChanged: (event) async {
-      state.copyWith(
+      emit(state.copyWith(
           password: Password(event.passwordStr),
-          authFailureOrSucessOption: none());
+          authFailureOrSucessOption: none()));
     }, registerWithEmailAndPasswordPressed: (event) async {
       _performActionOnAuthFacadeWithEmailAndPassword(
         _authFacade.registerWithEmailAndPassword,
@@ -39,11 +38,12 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
         _authFacade.signInWithEmailAndPassword,
       );
     }, signInWithGooglePressed: (event) async {
-      state.copyWith(isSubmitting: true, authFailureOrSucessOption: none());
+      emit(state.copyWith(
+          isSubmitting: true, authFailureOrSucessOption: none()));
       final failureOrSuccess = await _authFacade.signInWithGoogle();
-      state.copyWith(
+      emit(state.copyWith(
           isSubmitting: false,
-          authFailureOrSucessOption: some(failureOrSuccess));
+          authFailureOrSucessOption: some(failureOrSuccess)));
     });
   }
 
