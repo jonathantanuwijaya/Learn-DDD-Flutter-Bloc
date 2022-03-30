@@ -859,7 +859,7 @@ class _$SignInFormStateTearOff {
       {required EmailAddress emailAddress,
       required Password password,
       required bool isSubmitting,
-      required bool showErrorMessages,
+      required AutovalidateMode showErrorMessages,
       required Option<Either<AuthFailure, Unit>> authFailureOrSucessOption}) {
     return _SignInFormState(
       emailAddress: emailAddress,
@@ -879,7 +879,7 @@ mixin _$SignInFormState {
   EmailAddress get emailAddress => throw _privateConstructorUsedError;
   Password get password => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
-  bool get showErrorMessages => throw _privateConstructorUsedError;
+  AutovalidateMode get showErrorMessages => throw _privateConstructorUsedError;
   Option<Either<AuthFailure, Unit>> get authFailureOrSucessOption =>
       throw _privateConstructorUsedError;
 
@@ -897,7 +897,7 @@ abstract class $SignInFormStateCopyWith<$Res> {
       {EmailAddress emailAddress,
       Password password,
       bool isSubmitting,
-      bool showErrorMessages,
+      AutovalidateMode showErrorMessages,
       Option<Either<AuthFailure, Unit>> authFailureOrSucessOption});
 }
 
@@ -934,7 +934,7 @@ class _$SignInFormStateCopyWithImpl<$Res>
       showErrorMessages: showErrorMessages == freezed
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as AutovalidateMode,
       authFailureOrSucessOption: authFailureOrSucessOption == freezed
           ? _value.authFailureOrSucessOption
           : authFailureOrSucessOption // ignore: cast_nullable_to_non_nullable
@@ -954,7 +954,7 @@ abstract class _$SignInFormStateCopyWith<$Res>
       {EmailAddress emailAddress,
       Password password,
       bool isSubmitting,
-      bool showErrorMessages,
+      AutovalidateMode showErrorMessages,
       Option<Either<AuthFailure, Unit>> authFailureOrSucessOption});
 }
 
@@ -993,7 +993,7 @@ class __$SignInFormStateCopyWithImpl<$Res>
       showErrorMessages: showErrorMessages == freezed
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as AutovalidateMode,
       authFailureOrSucessOption: authFailureOrSucessOption == freezed
           ? _value.authFailureOrSucessOption
           : authFailureOrSucessOption // ignore: cast_nullable_to_non_nullable
@@ -1019,7 +1019,7 @@ class _$_SignInFormState implements _SignInFormState {
   @override
   final bool isSubmitting;
   @override
-  final bool showErrorMessages;
+  final AutovalidateMode showErrorMessages;
   @override
   final Option<Either<AuthFailure, Unit>> authFailureOrSucessOption;
 
@@ -1064,7 +1064,7 @@ abstract class _SignInFormState implements SignInFormState {
       {required EmailAddress emailAddress,
       required Password password,
       required bool isSubmitting,
-      required bool showErrorMessages,
+      required AutovalidateMode showErrorMessages,
       required Option<Either<AuthFailure, Unit>>
           authFailureOrSucessOption}) = _$_SignInFormState;
 
@@ -1075,7 +1075,7 @@ abstract class _SignInFormState implements SignInFormState {
   @override
   bool get isSubmitting;
   @override
-  bool get showErrorMessages;
+  AutovalidateMode get showErrorMessages;
   @override
   Option<Either<AuthFailure, Unit>> get authFailureOrSucessOption;
   @override

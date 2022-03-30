@@ -8,6 +8,7 @@ class SignInForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<SignInFormBloc, SignInFormState>(
         listener: (context, state) {
+      debugPrint('snackbar is called');
       state.authFailureOrSucessOption.fold(
           () {},
           (either) => either.fold((failure) {
@@ -15,16 +16,14 @@ class SignInForm extends StatelessWidget {
                   content: const Text('Error Happened'),
                   action: SnackBarAction(
                     label: 'Action',
-                    onPressed: () {
-                      print('snackbar is called');
-                    },
+                    onPressed: () {},
                   ),
                 ));
               }, (_) => {}));
     }, builder: (context, state) {
       return Form(
         key: _formKey,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
+        autovalidateMode: state.showErrorMessages,
         child: ListView(
           children: [
             const Text('Notes DDD', textAlign: TextAlign.center),
