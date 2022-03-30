@@ -31,49 +31,11 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
           password: Password(event.passwordStr),
           authFailureOrSucessOption: none()));
     }, registerWithEmailAndPasswordPressed: (event) async {
-      // _performActionOnAuthFacadeWithEmailAndPassword(
-      //     _authFacade.registerWithEmailAndPassword, emit);
-      final isEmailValid = state.emailAddress.isValid();
-      final isPasswordValid = state.password.isValid();
-      Either<AuthFailure, Unit>? failureOrSuccess;
-      if (isEmailValid && isPasswordValid) {
-        emit(state.copyWith(
-            authFailureOrSucessOption: none(),
-            isSubmitting: false,
-            showErrorMessages: AutovalidateMode.always));
-
-        failureOrSuccess = await _authFacade.registerWithEmailAndPassword(
-            emailAddress: state.emailAddress, password: state.password);
-        emit(state.copyWith(
-            authFailureOrSucessOption: some(failureOrSuccess),
-            isSubmitting: false));
-      }
-
-      emit(state.copyWith(
-          isSubmitting: false,
-          showErrorMessages: AutovalidateMode.always,
-          authFailureOrSucessOption: optionOf(failureOrSuccess)));
+      return _performActionOnAuthFacadeWithEmailAndPassword(
+          _authFacade.registerWithEmailAndPassword, emit);
     }, signInWithEmailAndPasswordPressed: (event) async {
-      final isEmailValid = state.emailAddress.isValid();
-      final isPasswordValid = state.password.isValid();
-      Either<AuthFailure, Unit>? failureOrSuccess;
-      if (isEmailValid && isPasswordValid) {
-        emit(state.copyWith(
-            authFailureOrSucessOption: none(),
-            isSubmitting: false,
-            showErrorMessages: AutovalidateMode.always));
-
-        failureOrSuccess = await _authFacade.signInWithEmailAndPassword(
-            emailAddress: state.emailAddress, password: state.password);
-        emit(state.copyWith(
-            authFailureOrSucessOption: some(failureOrSuccess),
-            isSubmitting: false));
-      }
-
-      emit(state.copyWith(
-          isSubmitting: false,
-          showErrorMessages: AutovalidateMode.always,
-          authFailureOrSucessOption: optionOf(failureOrSuccess)));
+      return _performActionOnAuthFacadeWithEmailAndPassword(
+          _authFacade.signInWithEmailAndPassword, emit);
     }, signInWithGooglePressed: (event) async {
       emit(state.copyWith(
           isSubmitting: true, authFailureOrSucessOption: none()));
@@ -84,13 +46,13 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
     });
   }
 
-  Stream<SignInFormState> _performActionOnAuthFacadeWithEmailAndPassword(
+  FutureOr<void> _performActionOnAuthFacadeWithEmailAndPassword(
       Future<Either<AuthFailure, Unit>> Function({
     required EmailAddress emailAddress,
     required Password password,
   })
           forwardedCall,
-      Emitter<SignInFormState> emit) async* {
+      Emitter<SignInFormState> emit) async {
     final isEmailValid = state.emailAddress.isValid();
     final isPasswordValid = state.password.isValid();
     Either<AuthFailure, Unit>? failureOrSuccess;
