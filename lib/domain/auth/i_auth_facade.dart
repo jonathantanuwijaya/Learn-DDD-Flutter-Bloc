@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/foundation.dart';
 import 'package:learning/domain/auth/auth_failure.dart';
+import 'package:learning/domain/auth/user.dart';
 import 'value_object.dart';
 
 abstract class IAuthFacade {
@@ -13,4 +13,7 @@ abstract class IAuthFacade {
     required Password password,
   });
   Future<Either<AuthFailure, Unit>> signInWithGoogle();
+
+  Future<Option<User>> getSignedUser();
+  Future<void> signOut();
 }

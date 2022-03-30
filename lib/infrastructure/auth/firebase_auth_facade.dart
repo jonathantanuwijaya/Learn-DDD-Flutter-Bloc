@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
+import 'package:learning/core/value_object.dart';
 import 'package:learning/domain/auth/auth_failure.dart';
 import 'package:learning/domain/auth/i_auth_facade.dart';
+import 'package:learning/domain/auth/user.dart';
 import 'package:learning/domain/auth/value_object.dart';
 
 @Injectable(as: IAuthFacade)
@@ -70,5 +72,22 @@ class FirebaseAuthFacade implements IAuthFacade {
     } on PlatformException catch (_) {
       return left(const AuthFailure.serverError());
     }
+  }
+
+  @override
+  Future<Option<User>> getSignedUser() async {
+    // var initUser = User(id: UniqueId.fromUniqueString('1'));
+    // await Future.delayed(Duration(seconds: 2));
+    // return some(initUser);
+    final inititalUser = User(id: UniqueId.fromUniqueString('1'));
+    await Future.delayed(const Duration(seconds: 1));
+    return some(inititalUser);
+  }
+  // optionOf(_firebaseAuth.currentUser?.toDomain());
+  // _firebaseAuth.currentUser.then((firebaseUser) => optionOf()));
+
+  @override
+  Future<void> signOut() {
+    return Future.wait([_firebaseAuth.signOut(), _googleSignIn.signOut()]);
   }
 }
