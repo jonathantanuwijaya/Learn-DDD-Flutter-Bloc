@@ -11,12 +11,13 @@ class SplashPage extends StatelessWidget {
         state.map(
             initial: (_) {},
             authenticated: (_) {
-              // Navigator.push(
-              //     context, MaterialPageRoute(builder: (context) => SignInPage()));
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => SignInPage()));
               debugPrint('User Authenticated');
+
             },
             unauthenticated: (_) {
-              Navigator.push(context,
+              Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => SignInPage()));
             });
       },

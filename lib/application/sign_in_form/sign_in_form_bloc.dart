@@ -59,13 +59,13 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
     if (isEmailValid && isPasswordValid) {
       emit(state.copyWith(
           authFailureOrSucessOption: none(),
-          isSubmitting: false,
+          isSubmitting: true,
           showErrorMessages: AutovalidateMode.always));
 
-      failureOrSuccess = await forwardedCall(
-          emailAddress: state.emailAddress, password: state.password);
+      // failureOrSuccess = await forwardedCall(
+      //     emailAddress: state.emailAddress, password: state.password);
       emit(state.copyWith(
-          authFailureOrSucessOption: some(failureOrSuccess),
+          authFailureOrSucessOption: some(unit as Either<AuthFailure, Unit>),
           isSubmitting: false));
     }
 
