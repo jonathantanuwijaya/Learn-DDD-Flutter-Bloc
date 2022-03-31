@@ -43,6 +43,7 @@ dependencies:
   injectable: ^1.5.3
   get_it: ^7.2.0
   uuid: ^3.0.6
+  auto_route: ^3.2.4
 
 dependency_overrides:
   firebase_auth_platform_interface: 6.1.11
@@ -52,6 +53,7 @@ dev_dependencies:
     sdk: flutter
   freezed: ^1.1.1
   build_runner: 
+  auto_route_generator: ^3.2.3
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
