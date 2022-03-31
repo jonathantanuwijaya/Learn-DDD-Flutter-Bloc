@@ -19,6 +19,10 @@ abstract class ValueObject<T> {
   }
 
 //  const EmailAddress._(this.value);
+  Either<ValueFailure<dynamic>, Unit> get failureOrUnit {
+    return value.fold((l) => left(l), (r) => right(unit));
+  }
+
   bool isValid() => value.isRight();
 
   @override
@@ -34,6 +38,7 @@ abstract class ValueObject<T> {
   @override
   String toString() => 'Value(value: $value)';
 }
+
 class UniqueId extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
